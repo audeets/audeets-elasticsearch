@@ -1,0 +1,21 @@
+{
+    "query": {
+      "bool": {
+        "must": [
+          {
+            "term": {
+              "project": "{{id}}"
+            }
+          },
+          {
+            "range": {
+              "timestamp": {
+                "gte": "now",
+                "lte": "now"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }

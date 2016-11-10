@@ -1,0 +1,26 @@
+{
+    "size": 0,
+    "query": {
+      "filtered": {
+        "query": {
+          "match": {
+            "project": "{{id}}"
+          }
+        }
+      }
+    },
+     "aggs": {
+      "categories": {
+        "terms": {
+          "field": "category"
+        },
+        "aggs": {
+          "day": {
+            "terms": {
+              "field": "timestamp"
+            }
+          }
+        }
+      }
+    }
+  }

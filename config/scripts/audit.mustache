@@ -10,8 +10,9 @@
           {
             "range": {
               "timestamp": {
-                "gte": "now",
-                "lte": "now"
+                "gte": "{{floor}}",
+                "lt": "{{ceiling}}",
+                "format": "{{format}}"
               }
             }
           }

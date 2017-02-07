@@ -22,15 +22,6 @@ build:
     - docker build --pull -t $BUILD_IMAGE .
     - docker push $BUILD_IMAGE
 
-linting:
-  stage: test
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
-    - docker pull $BUILD_IMAGE
-    - docker run $BUILD_IMAGE npm run lint
-
 registry:
   stage: release
   variables:

@@ -4,5 +4,5 @@ FROM elasticsearch:2
 COPY config /usr/share/elasticsearch/config
 
 # install Marvel
-RUN sudo /usr/share/elasticsearch/bin/plugin install license
-RUN sudo /usr/share/elasticsearch/bin/plugin install marvel-agent
+RUN /usr/share/elasticsearch/bin/plugin install license
+RUN /usr/share/elasticsearch/bin/plugin install marvel-agent

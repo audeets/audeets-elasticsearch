@@ -46,7 +46,7 @@ registry:
 #   only:
 #     - master
 
-  production:
+production:
   stage: deploy
   environment: production
   variables:

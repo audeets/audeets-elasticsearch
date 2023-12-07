@@ -1,4 +1,4 @@
-FROM elasticsearch:8
+FROM elasticsearch:8.11.1
 
 # copy the configuration files
 COPY config /usr/share/elasticsearch/config

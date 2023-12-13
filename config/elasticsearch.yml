@@ -1,4 +1,4 @@
 network.host: 0.0.0.0
-script.engine.groovy.inline.aggs: on
+# script.engine.groovy.inline.aggs: on
 http.cors.enabled: true
 http.cors.allow-origin: "*"

@@ -1,0 +1,39 @@
+PUT /_scripts/audits HTTP/1.1
+Host: 192.168.1.26:9200
+Content-Type: application/json
+Content-Length: 895
+
+{
+    "script": {
+        "lang": "mustache",
+        "source": {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "must": {
+                        "match": {
+                            "project": "{{id}}"
+                        }
+                    }
+                }
+            },
+            "aggs": {
+                "categories": {
+                    "terms": {
+                        "field": "category"
+                    },
+                    "aggs": {
+                        "day": {
+                            "terms": {
+                                "field": "timestamp",
+                                "order": {
+                                    "_key": "desc"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

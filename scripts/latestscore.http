@@ -1,0 +1,47 @@
+PUT /_scripts/latestscore HTTP/1.1
+Host: 192.168.1.26:9200
+Content-Type: application/json
+Content-Length: 1227
+
+{
+    "script": {
+        "lang": "mustache",
+        "source": {
+            "size": 0,
+            "query": {
+                "bool": {
+                    "must": {
+                        "match": {
+                            "project": "{{id}}"
+                        }
+                    }
+                }
+            },
+            "aggs": {
+                "categories": {
+                    "terms": {
+                        "field": "category"
+                    },
+                    "aggs": {
+                        "day": {
+                            "terms": {
+                                "field": "timestamp",
+                                "order": {
+                                    "_key": "desc"
+                                },
+                                "size": 1
+                            },
+                            "aggs": {
+                                "scores": {
+                                    "terms": {
+                                        "field": "check"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

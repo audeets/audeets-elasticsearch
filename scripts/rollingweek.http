@@ -1,0 +1,57 @@
+PUT /_scripts/rollingweek HTTP/1.1
+Host: 192.168.1.26:9200
+Content-Type: application/json
+Content-Length: 1217
+
+{
+    "script": {
+        "lang": "mustache",
+        "source": {
+    "size": 0,
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "project": "{{id}}"
+                    }
+                }
+            ],
+            "filter": {
+                "range": {
+                    "timestamp": {
+                        "gte": "now-7d",
+                        "lte": "now"
+                    }
+                }
+            }
+        }
+    },
+    "aggs": {
+        "categories": {
+            "terms": {
+                "field": "category"
+            },
+            "aggs": {
+                "day": {
+                    "terms": {
+                        "field": "timestamp",
+                        "format": "yyyy-MM-dd",
+                        "order": {
+                            "_key": "asc"
+                        }
+                    },
+                    "aggs": {
+                        "scores": {
+                            "terms": {
+                                "field": "check"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+    }
+}
